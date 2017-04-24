@@ -1,10 +1,14 @@
+<!-- TODO -->
+<!-- 完成showMoonIcon url的替换 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="style/main.css">
+	<link rel="stylesheet" type="text/css" href="style/normalize.css">
 	<script src="src/js/vue.js"></script>
+
 </head>
 <body>
 	<div id="app">
@@ -13,31 +17,54 @@
 			<div id="weather">
 				<!-- //显示条件设置城市的index===showCityWeatherIndex -->
 			 	<div v-for="(cityWeather, index) in citysWeather" v-show="index === showCityWeatherIndex">
-					<p>
+					<p  class="weatherWrap" v-on:mouseover="showCityFivedayWeather=true" v-on:mouseout="showCityFivedayWeather=false">
 						<span>{{cityWeather.cityName}}</span>
-						<!-- <span class="weatherIcon" v:bind:style="background:url(cityWeather.cityFivedayWeather)"></span> -->
-						<span>{{cityWeather.cityFivedayWeather[0].everydayTemp}}<i>℃</i></span>
+						
+						<span class="smallWeatherIcon" :class="{showDayIcon:showDayIcon, showNightIcon:!showDayIcon}"></span>
+						<span class="">{{cityWeather.cityFivedayWeather[0].everydayTemp}}℃</span>
 						<span>{{cityWeather.cityPolutionName}}</span>
 						<span>{{cityWeather.cityPolutionNum}}</span>
+						<span></span>
 					</p>   <!-- 显示当天cityWeather -->
-			
-					<div class="cityFivedayWeather">
+
+					<!-- 存放目标city fivedayWeathercityWeather -->
+					<div class="cityFivedayWeather" v-show="showCityFivedayWeather" v-on:mouseover="showCityFivedayWeather=true" v-on:mouseout="showCityFivedayWeather=false">
 						<p>
 							<span>{{calendar}}</span>
-							<span>{{festival}}</span>
-							<a v-bind:href="cityWeather.cityHref">未来七天天气</a>
-							<button @click="showCityWeatherIndex++">设置</button>  
+							<span class="festival">{{festival}}</span>
+							<a class="sevenday" v-bind:href="cityWeather.cityHref">未来七天天气</a>
+							<span class="settingCity" @click="settingCityContent=true">设置</span>  
 							<!-- 设置的目标 切换button目标根据所选城市去修改要渲染的cityWeather。即修改当前的showCityWeatherIndex-->
 						</p>
 						<!-- everyday组件用来渲染每天weather情况 -->
-						<everyday-weather v-for="everyday, index in cityWeather.cityFivedayWeather" :now-date="fiveDays[index]" :everyday-title="everydayTitle[index]" :everyday-weather="everyday"></everyday-weather>
-						<!-- <everyday-weather v-for="(everyday, index) in cityWeather.cityFivedayWeather"></everyday-weather :everyday-title="everydayTitle[index]" :now-date="nowDate"> -->
-						
+						<everyday-weather v-for="(everyday, index) in cityWeather.cityFivedayWeather" :now-date="fiveDays[index]" :everyday-title="everydayTitle[index]" :everyday-weather="everyday" :everyday-city-href="cityWeather.cityHref" :class="{isToday:index==0}"></everyday-weather>
 					</div> 
-					<!-- 存放目标city fivedayWeathercityWeather
+
+					<!-- 设置目标城市 -->
+					<!-- TODO v-show设置城市出现-->
+					<div id="settingCityContent" v-show="settingCityContent">
+						<p>请选择您所在的地区</p>
+						<!-- <select id="selectProvice">
+							<option v-for="(cityWeather, index) in citysWeather" v-bind:value="selectProvice">{{cityWeather.cityName}}</option>
+						</select> -->
+						<select id="selectProvince" onchange="getCityIndex()">
+							<option >北京</option>
+							<option>上海</option>
+						</select>
+						<select id="selectCounty">
+							<option>{{citysWeather[selectCityIndex].cityName}}</option>
+						</select>
+						<label><input type="checkbox">极端天气提醒（出现大雨、大学、冰雹等）</label>
+						<div class="settingSaveOrCancel">
+							<a href="#" onclick="return false;" hidefocus="" class="setting-save">保 存</a>
+							<a href="#" onclick="return false;" hidefocus="" class="setting-cancel">取 消</a>
+						</div>
+					</div>
 					
+					<!-- <div><a href="">宝箱</a><a href="">换肤</a><a href="">消息</a></div>
+					<!-- TODO -->
 				</div> 
-				<!-- <div><a href="">宝箱</a><a href="">换肤</a><a href="">消息</a></div> -->
+				
 			</div>
 			<div id="info">
 				<a href="http://news.baidu.com">新闻</a>

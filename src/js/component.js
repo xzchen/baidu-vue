@@ -1,20 +1,20 @@
 Vue.component("everyday-weather", {
-	props:["nowDate", "everydayTitle", "everydayWeather"],
+	props:["nowDate", "everydayTitle", "everydayWeather", "everydayCityHref"],
 	data() {
-
 		return {
-			title: this.getTitle()
+			title: this.getTitle(),
+			iconUrl: this.getIconUrl(),
 		}
-	},
+	}, 
 	template: `
-			<div>
-
-				<p>{{title}}</p>
-				<span style="background:url()"></span>
-				<p>{{everydayWeather.everydayTemp}}</p>
-				<p>{{everydayWeather.everydayCondition}}</p>
-				<p>{{everydayWeather.everydayWind}}</p>
-				<hr>
+			<div class="everydayWeather">
+				<a :href="everydayCityHref">
+					<p class="everydayTitle">{{title}}</p>
+					<span class="everydayIcon" :style="iconUrl"></span>
+					<p>{{everydayWeather.everydayTemp}}℃</p>
+					<p>{{everydayWeather.everydayCondition}}</p>
+					<p>{{everydayWeather.everydayWind}}</p>
+				</a>
 			</div>
 		`,
 	mounted() {
@@ -26,5 +26,9 @@ Vue.component("everyday-weather", {
 			title = this.everydayTitle === ""?week[this.nowDate.getDay()]:this.everydayTitle + week[this.nowDate.getDay()] + ")";
 			return title;
 		},
+		getIconUrl() {
+			iconUrl = 'background: url(' + this.everydayWeather.everydayIconUrl + ')';
+			return iconUrl;
+		}
 	},
 })

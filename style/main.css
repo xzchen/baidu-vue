@@ -1,10 +1,114 @@
 @charset "utf-8";
+/*--header部分*/
+header {
+	height: 32px;
+	padding-left: 15px;
+	border-bottom: 1px solid #ebebeb;
+	font: 12px/32px arial;
+	background: #fff;
+	color: #555;
+}
+header a {
+	font:bold 13px arial;
+}
 
-.cityFivedayWeather div{
-	float: left;
-	background: red;
+header p {
+	margin:0;
 }
-#everydayTemperature div {
+
+#weather {
 	float: left;
-	background: red;
+	height: 35px;
 }
+#info {
+	float: right;
+}
+
+/*--weatherWrap*/
+.weatherWrap {
+	position: relative;
+	display: inline-block;
+}
+.smallWeatherIcon {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+	
+	background: url("https://ss0.bdstatic.com/k4oZeXSm1A5BphGlnYG/icon/weather/aladdin/png_18/a0_night.png")
+}
+.showMoonIcon {
+	background: url("https://ss0.bdstatic.com/k4oZeXSm1A5BphGlnYG/icon/weather/aladdin/jpg/a0.jpg") 
+}
+
+/*--weatherWraphover下出现的cityFivedayWeather信息*/
+.cityFivedayWeather,
+#settingCityContent {
+	position: absolute;
+	border:1px solid #ccc;
+	width: 585px;
+	height: 200px;
+	padding: 0 19px;
+	margin-left: -15px;
+}
+.weatherWrap:hover + .cityFivedayWeather{
+	display: block;
+}
+.cityFivedayWeather p {
+	line-height: 40px;
+}
+.festival {
+	color: #999;
+	margin: 0 18px 0 10px;
+}
+.sevenday {
+	color: #0079f4;
+}
+.settingCity {
+	float: right;
+    color: #666;
+    width: 40px;
+	background: url(../img/load_ext_spis_65c74648.png) no-repeat -36px -88px;
+	background-position: -36px -89px;
+}
+
+/*--header下展示everyday-weather的组件*/
+.everydayWeather {
+	float: left;
+	width: 105px;
+	height: 146px;
+	font-family: arial;
+	font-weight: normal;
+	text-align: center;
+	color: #666;
+}
+.everydayWeather:hover {
+	color: #0079f5;
+}
+.isToday {
+	width: 161px;
+	font-weight: bold;
+}
+.everydayWeather a {
+	font:inherit;
+	color:inherit;
+	text-decoration: none;
+}
+.everydayWeather .everydayTitle {
+	line-height: 34px;
+}
+.everydayWeather .everydayIcon {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+}
+.everydayWeather p {
+	line-height: 18px;
+}
+
+#settingCityContent {
+	
+	
+}
+/*header下展示everyday-weather的组件--*/
+/*--weatherWraphover下出现的cityFivedayWeather信息--*/

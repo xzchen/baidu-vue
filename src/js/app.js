@@ -2,8 +2,8 @@ var z = new Vue({
 	el: "#app",
 	data: {
 		showCityWeatherIndex: 0, //指示当前render是的哪个城市的weather信息
-		
-		// cityNameHref: [https://www.baidu.com/s?tn=baidutop10&rsv_idx=2&wd=%E6%B7%B1%E5%9C%B3%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5", "https://www.baidu.com/s?tn=baidutop10&rsv_idx=2&wd=%E6%9D%AD%E5%B7%9E%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5", "https://www.baidu.com/s?tn=baidutop10&rsv_idx=2&wd=%E6%88%90%E9%83%BD%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5"],
+		selectCityIndex: 0,
+		showDayIcon: showDayIcon,
 		citysWeather: [
 			{
 				cityName: "北京",
@@ -82,8 +82,11 @@ var z = new Vue({
 				cityPolutionNum: 69,
 			},
 		],
+		showCityFivedayWeather:false,
+		nowDate: nowDate,
 		calendar: calendar,		
 		festival: festival,//TODO农历日期还没做
+		settingCityContent:false,
 		fiveDays: fiveDays,//根据main.js计算出5天内的每天具体日期传值到要渲染的everyday-weather组件里
 		everydayTitle: ["今天(", "明天(", "后天(", "", ""],
 	},
