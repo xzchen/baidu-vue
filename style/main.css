@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+.cityFivedayWeather div{
+	float: left;
+	background: red;
+}
+#everydayTemperature div {
+	float: left;
+	background: red;
+}

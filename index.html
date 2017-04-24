@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="style/main.css">
+	<script src="src/js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- {{citysWeather}} -->
+		<header>
+			<div id="weather">
+				<!-- //显示条件设置城市的index===showCityWeatherIndex -->
+			 	<div v-for="(cityWeather, index) in citysWeather" v-show="index === showCityWeatherIndex">
+					<p>
+						<span>{{cityWeather.cityName}}</span>
+						<!-- <span class="weatherIcon" v:bind:style="background:url(cityWeather.cityFivedayWeather)"></span> -->
+						<span>{{cityWeather.cityFivedayWeather[0].everydayTemp}}<i>℃</i></span>
+						<span>{{cityWeather.cityPolutionName}}</span>
+						<span>{{cityWeather.cityPolutionNum}}</span>
+					</p>   <!-- 显示当天cityWeather -->
+			
+					<div class="cityFivedayWeather">
+						<p>
+							<span>{{calendar}}</span>
+							<span>{{festival}}</span>
+							<a v-bind:href="cityWeather.cityHref">未来七天天气</a>
+							<button @click="showCityWeatherIndex++">设置</button>  
+							<!-- 设置的目标 切换button目标根据所选城市去修改要渲染的cityWeather。即修改当前的showCityWeatherIndex-->
+						</p>
+						<!-- everyday组件用来渲染每天weather情况 -->
+						<everyday-weather v-for="everyday, index in cityWeather.cityFivedayWeather" :now-date="fiveDays[index]" :everyday-title="everydayTitle[index]" :everyday-weather="everyday"></everyday-weather>
+						<!-- <everyday-weather v-for="(everyday, index) in cityWeather.cityFivedayWeather"></everyday-weather :everyday-title="everydayTitle[index]" :now-date="nowDate"> -->
+						
+					</div> 
+					<!-- 存放目标city fivedayWeathercityWeather
+					
+				</div> 
+				<!-- <div><a href="">宝箱</a><a href="">换肤</a><a href="">消息</a></div> -->
+			</div>
+			<div id="info">
+				<a href="http://news.baidu.com">新闻</a>
+				<a href="http://www.hao123.com">新闻</a>
+				<a href="http://map.baidu.com">新闻</a>
+				<a href="http://v.baidu.com">新闻</a>
+				<a href="http://tieba.baidu.com">新闻</a>
+				<a href="http://xueshu.baidu.com">新闻</a>
+				<a href="http://i.baidu.com/">用户名</a>
+				<a href="http://www.baidu.com/more/">新闻</a>
+			</div>
+		</header>
+	</div>
+	<script src="src/js/component.js"></script>
+	<script src="src/js/main.js"></script>
+	<script src="src/js/app.js"></script>
+</body>
+</html>
